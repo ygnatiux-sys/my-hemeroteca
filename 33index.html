@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TGP Project 🧩 — Hybrid Visual Landing (Bluehost‑ready)</title>
+  <meta name="description" content="TGP Project · Dark‑museum ambient · Cyan archive accents · Hybrid landing without build (pure HTML/CSS/JS)." />
+
+  <!-- Optional: web font (safe fallback to system fonts if blocked) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0e12;
+      --ink:#d6d8dc;
+      --muted:#a3a7af;
+      --cyan:#00eaff;
+      --neon:#e4ff3a;
+      --glass:rgba(255,255,255,.06);
+      --stroke:rgba(255,255,255,.08);
+      --shadow:0 12px 40px rgba(0,0,0,.45);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font-family:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      line-height:1.45; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+      overflow-x:hidden;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{width:min(1120px, 92vw); margin-inline:auto}
+
+    .ambient-grid{
+      position:fixed; inset:0; pointer-events:none; opacity:.08;
+      background-image:
+        radial-gradient(circle at 20% 10%, #6ff 0, transparent 30%),
+        radial-gradient(circle at 80% 0%, #ff0 0, transparent 35%),
+        linear-gradient(transparent 69%, rgba(255,255,255,.06) 70%, transparent 71%),
+        linear-gradient(90deg, transparent 69%, rgba(255,255,255,.06) 70%, transparent 71%);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+      mask-image: radial-gradient(ellipse at 50% 30%, black 50%, transparent 80%);
+    }
+
+    .hero{
+      position:relative; min-height:86vh; display:grid; place-items:center;
+      isolation:isolate; overflow:hidden;
+    }
+    .hero-media{
+      position:absolute; inset:-6% -6% -6% -6%; z-index:-2; filter:contrast(105%) saturate(108%);
+      transform:translateZ(0);
+    }
+    .hero-media img{
+      width:100%; height:100%; object-fit:cover; opacity:.45; animation:kenburns 26s ease-in-out infinite;
+      transform-origin: 60% 40%;
+    }
+    .vignette{position:absolute; inset:0; z-index:-1;
+      background:radial-gradient(ellipse at 50% 45%, transparent 0 52%, rgba(0,0,0,.35) 72%, rgba(0,0,0,.7) 100%);
+    }
+
+    .floater{
+      position:absolute; inset:auto; pointer-events:none; mix-blend:screen; opacity:.25;
+      filter:blur(1px) drop-shadow(0 10px 30px rgba(0,0,0,.35));
+      animation:float 14s ease-in-out infinite alternate;
+    }
+    .floater.cyan{color:var(--cyan)}
+    .floater.neon{color:var(--neon)}
+
+    .hero-card{
+      background:linear-gradient( to bottom right, rgba(15,20,28,.6), rgba(12,16,22,.5));
+      border:1px solid var(--stroke); box-shadow:var(--shadow); border-radius:24px;
+      padding:32px clamp(20px, 4vw, 44px);
+      backdrop-filter: blur(8px);
+    }
+    .eyebrow{letter-spacing:.14em; text-transform:uppercase; font-size:.78rem; color:var(--muted)}
+    .title{font-size:clamp(1.8rem, 3.8vw, 3rem); margin:.35rem 0 0; font-weight:700}
+    .subtitle{color:var(--muted); font-size:clamp(1.02rem,1.6vw,1.2rem); margin:.75rem 0 1.25rem}
+
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; gap:.6rem; padding:10px 16px; border-radius:10px; font-weight:600; border:1px solid transparent; transition:.3s ease; position:relative; isolation:isolate}
+    .btn svg{width:18px; height:18px}
+
+    .btn-cyan{ color:var(--cyan); border-color: color-mix(in oklab, var(--cyan) 45%, transparent); }
+    .btn-cyan:hover{ color:#fff; background: color-mix(in oklab, var(--cyan) 16%, transparent); box-shadow:0 0 0 3px color-mix(in oklab, var(--cyan) 18%, transparent) inset, 0 10px 28px rgba(0,234,255,.15) }
+
+    .btn-neon{ color:var(--neon); border-color: color-mix(in oklab, var(--neon) 40%, transparent) }
+    .btn-neon:hover{ color:#111; background: color-mix(in oklab, var(--neon) 32%, transparent); box-shadow:0 0 0 3px color-mix(in oklab, var(--neon) 20%, transparent) inset, 0 8px 26px rgba(228,255,58,.18) }
+
+    .btn-ghost{ color:var(--ink); border-color:var(--stroke) }
+    .btn-ghost:hover{ background:var(--glass); color:#fff }
+
+    .badge{display:inline-block; padding:6px 10px; border-radius:999px; border:1px solid color-mix(in oklab, var(--cyan) 45%, transparent); color:var(--cyan); font-size:.78rem; letter-spacing:.06em}
+
+    section[data-section]{padding:64px 0; border-top:1px dashed var(--stroke)}
+    h2{font-size:clamp(1.3rem,2.4vw,1.8rem); margin:0 0 10px}
+    p.lead{color:var(--muted); margin:0 0 20px}
+
+    .cards{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:16px}
+    .card{background:linear-gradient( to bottom right, rgba(17,23,31,.9), rgba(11,14,18,.9)); border:1px solid var(--stroke); border-radius:var(--radius); padding:18px 18px 20px; transition:.3s ease; position:relative}
+    .card:hover{transform:translateY(-2px); box-shadow:0 12px 24px rgba(0,0,0,.35)}
+    .chip{display:inline-flex; align-items:center; gap:.5rem; font-size:.78rem; color:var(--muted)}
+    .chip i{width:8px; height:8px; border-radius:999px; display:inline-block; background:var(--cyan); box-shadow:0 0 12px rgba(0,234,255,.6)}
+
+    footer.tgp-footer{ padding:22px 0; border-top:1px solid color-mix(in oklab, var(--cyan) 26%, transparent) }
+    .tgp-wrap{ display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap }
+    .tgp-muted{ opacity:.8; font-size:.92rem }
+    .tgp-btn{ padding:8px 14px; border-radius:6px; text-decoration:none; font-size:.9rem; transition:.3s ease; border:1px solid transparent }
+    .tgp-btn--cyan{ color:var(--cyan); border-color: color-mix(in oklab, var(--cyan) 45%, transparent) }
+    .tgp-btn--cyan:hover{ background: color-mix(in oklab, var(--cyan) 16%, transparent); color:#fff }
+    .tgp-btn--neon{ color:var(--neon); border-color: color-mix(in oklab, var(--neon) 45%, transparent) }
+    .tgp-btn--neon:hover{ background: color-mix(in oklab, var(--neon) 18%, transparent); color:#111 }
+
+    @keyframes kenburns{
+      0%{ transform:scale(1.06) translate(0,0) }
+      50%{ transform:scale(1.12) translate(1.5%, -1.5%) }
+      100%{ transform:scale(1.06) translate(0,0) }
+    }
+    @keyframes float{
+      from{ transform:translateY(0) }
+      to{ transform:translateY(-14px) }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ambient-grid" aria-hidden="true"></div>
+
+  <header class="hero" data-section="hero">
+    <div class="hero-media" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2000&auto=format&fit=crop" alt="Background texture – dark museum" />
+    </div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <svg class="floater cyan" id="floaterCyan" width="220" height="220" viewBox="0 0 220 220" style="top:12%; left:8%">
+      <circle cx="110" cy="110" r="88" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".9" />
+      <circle cx="110" cy="110" r="64" fill="none" stroke="currentColor" stroke-width="1" opacity=".6" />
+    </svg>
+    <svg class="floater neon" id="floaterNeon" width="220" height="220" viewBox="0 0 220 220" style="bottom:12%; right:8%">
+      <rect x="40" y="40" width="140" height="140" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".9" rx="8" />
+      <rect x="64" y="64" width="92" height="92" fill="none" stroke="currentColor" stroke-width="1" opacity=".6" rx="6" />
+    </svg>
+
+    <div class="container hero-card">
+      <span class="badge">Sandbox visual · Dark‑museum</span>
+      <h1 class="title">TGP Project 🧩 · The Great Puzzle — Hybrid Landing</h1>
+      <p class="subtitle">Visual‑first sin build: micro‑animaciones (Ken Burns + parallax), acentos cyan/neón y estructura limpia. Compatible con cPanel/Bluehost tal cual.</p>
+      <div class="cta-row">
+        <a href="#serie" class="btn btn-cyan" data-track="cta-serie" title="Serie · De la Cueva al Cosmos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Serie · De la Cueva al Cosmos
+        </a>
+        <a href="#archeo" class="btn btn-neon" data-track="cta-archeo" title="ArcheoVoices">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5z"></path><path d="M16 7l1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z"></path></svg>
+          ArcheoVoices
+        </a>
+        <a href="#acerca" class="btn btn-ghost" title="Acerca">Acerca</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="serie" data-section="serie" class="container">
+    <h2>Serie · De la Cueva al Cosmos</h2>
+    <p class="lead">Narrativa visual y curaduría triple desde el archivo vivo hasta los arquetipos del cielo. Modelo híbrido: HTML + CSS + JS mínimo (sin React, sin build).</p>
+    <div class="cards">
+      <article class="card">
+        <div class="chip"><i></i> Palimpsestos del sentido</div>
+        <h3>Homo <em>Archivus</em></h3>
+        <p>El humano como animal archivador: memoria viva + memoria de archivo. Ensayos, e‑books y micro‑sitios.</p>
+      </article>
+      <article class="card">
+        <div class="chip"><i></i> Arquetipos narrativos</div>
+        <h3>El Espejo del Cosmos</h3>
+        <p>Del zodíaco como palimpsesto simbólico a las arquitecturas de sentido contemporáneas.</p>
+      </article>
+      <article class="card">
+        <div class="chip"><i></i> Orientaciones del sentido</div>
+        <h3>Amazing Compasses</h3>
+        <p>Mapas, calendarios y brújulas culturales: cómo orientamos significado en el tiempo.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="archeo" data-section="archeo" class="container">
+    <h2>ArcheoVoices · Podcast</h2>
+    <p class="lead">Guiones narrativos, cápsulas y playlists. Preparado para anclar a Spotify/YouTube cuando tengas URLs.</p>
+    <div class="cards">
+      <article class="card">
+        <div class="chip"><i></i> Episodio 01</div>
+        <h3>Ignatius Donnelly y la Atlántida moderna</h3>
+        <p>Cómo un libro del siglo XIX instauró la matriz de la pseudo‑arqueología popular.</p>
+      </article>
+      <article class="card">
+        <div class="chip"><i></i> Episodio 02</div>
+        <h3>Göbekli Tepe: templo, granja o archivo</h3>
+        <p>Cuando el círculo de piedra deviene interfaz: memoria, cosecha y cosmos.</p>
+      </article>
+      <article class="card">
+        <div class="chip"><i></i> Episodio 03</div>
+        <h3>Pueblos del Y‑signal</h3>
+        <p>Lo que la genética matiza del gran relato migratorio americano.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="acerca" data-section="acerca" class="container">
+    <h2>Acerca</h2>
+    <p class="lead">Este modelo es un <strong>híbrido</strong>: reproduce el look & feel del canvas React (ken burns, parallax suave, acentos cian/neón) pero en HTML puro compatible con cPanel/Bluehost. Sin Node, sin build.</p>
+  </section>
+
+  <footer class="tgp-bg tgp-footer">
+    <div class="container tgp-wrap">
+      <p class="tgp-muted" style="margin:0">© TGP Project 🧩 — Sandbox visual · Dark-museum ambient</p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <a href="#serie" class="tgp-btn tgp-btn--cyan">Serie · De la Cueva al Cosmos</a>
+        <a href="#archeo" class="tgp-btn tgp-btn--neon">ArcheoVoices</a>
+        <a href="#acerca" class="tgp-btn" style="color:#ddd;">Acerca</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      const cyan = document.getElementById('floaterCyan');
+      const neon = document.getElementById('floaterNeon');
+      const lerp = (a,b,t)=>a+(b-a)*t;
+      let tx1=0, ty1=0, tx2=0, ty2=0;
+
+      window.addEventListener('mousemove', (e)=>{
+        const { innerWidth:w, innerHeight:h } = window;
+        const nx = (e.clientX / w - .5);
+        const ny = (e.clientY / h - .5);
+        tx1 = nx * 16;  ty1 = ny * 10;
+        tx2 = -nx * 22; ty2 = -ny * 14;
+      });
+
+      function tick(){
+        const m = 0.08;
+        const cur1 = cyan.style.transform || 'translate3d(0,0,0)';
+        const cur2 = neon.style.transform || 'translate3d(0,0,0)';
+        const p1 = /translate3d\(([-0-9.]+)px, ([-0-9.]+)px, 0px\)/.exec(cur1);
+        const p2 = /translate3d\(([-0-9.]+)px, ([-0-9.]+)px, 0px\)/.exec(cur2);
+        const x1 = p1? parseFloat(p1[1]) : 0; const y1 = p1? parseFloat(p1[2]) : 0;
+        const x2 = p2? parseFloat(p2[1]) : 0; const y2 = p2? parseFloat(p2[2]) : 0;
+        const nx1 = lerp(x1, tx1, m), ny1 = lerp(y1, ty1, m);
+        const nx2 = lerp(x2, tx2, m), ny2 = lerp(y2, ty2, m);
+        cyan.style.transform = `translate3d(${nx1}px, ${ny1}px, 0px)`;
+        neon.style.transform = `translate3d(${nx2}px, ${ny2}px, 0px)`;
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+  </script>
+</body>
+</html>

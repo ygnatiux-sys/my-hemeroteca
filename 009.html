@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es" class="bg-black antialiased selection:bg-[#8c2f18] selection:text-white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TGP. | El mapa del sentido</title>
+    
+    <!-- Tipografía -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tgp-black': '#000000',
+                        'tgp-hairline': '#1f1e1c',
+                        'tgp-bone': '#e8e6e3',
+                        'tgp-rust': '#8c2f18',
+                        'tgp-muted': '#666666',
+                        'tgp-surface': '#050505',
+                    },
+                    fontFamily: {
+                        'newsreader': ['Newsreader', 'serif'],
+                        'mono': ['Space Mono', 'monospace'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        'widest': '0.2em',
+                        'tight': '-0.02em',
+                        'tighter': '-0.04em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* La dictadura del Grid: Control de la barra de desplazamiento y suavidad */
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; border-left: 1px solid #1f1e1c; }
+        ::-webkit-scrollbar-thumb { background: #1f1e1c; }
+        ::-webkit-scrollbar-thumb:hover { background: #8c2f18; }
+
+        /* Comportamiento Tectónico / Hover Quirúrgico */
+        .tectonic-block {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        background-color 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tectonic-block:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px -10px rgba(255, 255, 255, 0.02);
+            background-color: #030303;
+            z-index: 10;
+        }
+
+        .hairline-b { border-bottom: 1px solid #1f1e1c; }
+        .hairline-r { border-right: 1px solid #1f1e1c; }
+        .hairline-t { border-top: 1px solid #1f1e1c; }
+        .hairline-l { border-left: 1px solid #1f1e1c; }
+
+        /* Tratamiento de imágenes: Revelado en cuarto oscuro */
+        .print-image {
+            filter: grayscale(100%) contrast(1.1) brightness(0.8);
+            transition: filter 0.7s ease, transform 0.7s ease;
+        }
+        .group:hover .print-image {
+            filter: grayscale(80%) contrast(1.1) brightness(0.9);
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="text-tgp-bone bg-tgp-black min-h-screen flex justify-center">
+
+    <!-- CONTENEDOR MAESTRO: Establece los límites del papel (max-width) -->
+    <main class="w-full max-w-[1600px] hairline-l hairline-r flex flex-col bg-tgp-black shadow-[0_0_100px_rgba(0,0,0,1)]">
+        
+        <!-- HEADER -->
+        <header class="hairline-b p-6 lg:px-10 lg:py-8 flex justify-between items-center sticky top-0 bg-tgp-black/95 backdrop-blur-sm z-50">
+            <div class="font-newsreader text-3xl font-bold tracking-tighter text-white select-none cursor-pointer">
+                TGP<span class="text-tgp-rust">.</span>
+            </div>
+            <nav class="hidden md:flex font-mono text-[9px] uppercase tracking-widest text-tgp-muted gap-10 items-center">
+                <a href="#" class="hover:text-tgp-bone transition-colors">Archivo</a>
+                <a href="#" class="hover:text-tgp-bone transition-colors">Manifiesto</a>
+                <a href="#" class="border border-tgp-hairline px-4 py-2 hover:border-tgp-muted hover:text-tgp-bone transition-all">Soporte_Vacío</a>
+            </nav>
+            <!-- Mobile Menu Icon -->
+            <button class="md:hidden text-tgp-muted font-mono text-[9px] uppercase tracking-widest">Menu</button>
+        </header>
+
+        <!-- LEAD ESSAY: COLISIÓN TIPOGRÁFICA -->
+        <section class="hairline-b flex flex-col lg:flex-row relative min-h-[75vh]">
+            <div class="p-8 lg:p-16 lg:w-[65%] hairline-r flex flex-col justify-center relative">
+                
+                <!-- Indexación superior -->
+                <div class="flex gap-4 font-mono text-[9px] uppercase tracking-widest text-tgp-muted mb-12">
+                    <span class="border border-tgp-hairline px-3 py-1 bg-tgp-surface">Lead Essay</span>
+                    <span class="border border-tgp-hairline px-3 py-1">Documento 0287-A</span>
+                </div>
+                
+                <!-- Titular Colosal -->
+                <h1 class="font-newsreader text-[12vw] lg:text-[7rem] leading-[0.9] text-white tracking-tighter mb-10 max-w-4xl">
+                    El mapa<br>del sentido<br>
+                    <span class="italic text-tgp-muted font-normal tracking-tight">en la era digital.</span>
+                </h1>
+                
+                <!-- Bajada / Deck -->
+                <p class="font-inter text-tgp-muted max-w-lg text-[13px] leading-relaxed font-light">
+                    Cómo la memoria humana se reconfigura entre archivo y algoritmo. Una exploración de las condiciones materiales de la historia en la modernidad tardía.
+                </p>
+            </div>
+            
+            <!-- Espacio Negativo / Imagen Oculta -->
+            <div class="hidden lg:block lg:w-[35%] bg-tgp-surface relative overflow-hidden group">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1px] h-[1px] bg-tgp-hairline rounded-full group-hover:scale-[800] transition-transform duration-1000 ease-in-out opacity-20"></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE ÍNDICE / LECTURAS -->
+        <section class="hairline-b bg-tgp-black relative">
+            <div class="absolute top-0 left-0 w-full h-[1px] bg-tgp-hairline"></div>
+            <div class="px-8 lg:px-16 pt-10 pb-6">
+                <div class="font-mono text-[8px] uppercase tracking-widest text-tgp-muted flex items-center gap-4">
+                    Comenzar Lectura <span class="h-px bg-tgp-hairline w-12 block"></span>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 hairline-t">
+                
+                <!-- Celda 01 -->
+                <article class="p-10 lg:p-14 hairline-b lg:hairline-b-0 lg:hairline-r tectonic-block cursor-pointer">
+                    <div class="flex justify-between items-start mb-24">
+                        <span class="font-mono text-[8px] uppercase tracking-widest text-tgp-muted">Ensayo</span>
+                        <span class="font-mono text-[9px] text-tgp-rust">01</span>
+                    </div>
+                    <h2 class="font-newsreader text-4xl text-tgp-bone mb-6 leading-[1.1] tracking-tight group-hover:text-white transition-colors">La arquitectura<br>de la memoria</h2>
+                    <p class="font-inter text-[11px] text-tgp-muted leading-relaxed max-w-[250px]">Un recorrido por las cicatrices de la ciudad y cómo el concreto almacena el tiempo humano.</p>
+                </article>
+
+                <!-- Celda 02 -->
+                <article class="p-10 lg:p-14 hairline-b lg:hairline-b-0 lg:hairline-r tectonic-block cursor-pointer">
+                    <div class="flex justify-between items-start mb-24">
+                        <span class="font-mono text-[8px] uppercase tracking-widest text-tgp-muted">Interview</span>
+                        <span class="font-mono text-[9px] text-tgp-rust">02</span>
+                    </div>
+                    <h2 class="font-newsreader text-4xl text-tgp-bone mb-6 leading-[1.1] tracking-tight group-hover:text-white transition-colors">Diálogos sobre<br>la modernidad</h2>
+                    <p class="font-inter text-[11px] text-tgp-muted leading-relaxed max-w-[250px]">Conversación estructurada sobre la pérdida del relato central y la fragmentación del sentido.</p>
+                </article>
+
+                <!-- Celda 03 -->
+                <article class="p-10 lg:p-14 tectonic-block cursor-pointer">
+                    <div class="flex justify-between items-start mb-24">
+                        <span class="font-mono text-[8px] uppercase tracking-widest text-tgp-muted">Dialogic</span>
+                        <span class="font-mono text-[9px] text-tgp-rust">03</span>
+                    </div>
+                    <h2 class="font-newsreader text-4xl text-tgp-bone mb-6 leading-[1.1] tracking-tight group-hover:text-white transition-colors">El símbolo<br>frente al cálculo</h2>
+                    <p class="font-inter text-[11px] text-tgp-muted leading-relaxed max-w-[250px]">Tensión entre el conocimiento racional algorítmico y la persistencia de las formas simbólicas.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE CITA / MONUMENTO TEXTUAL -->
+        <section class="hairline-b py-24 lg:py-40 px-8 flex flex-col items-center justify-center text-center bg-tgp-surface">
+            <h3 class="font-newsreader text-3xl lg:text-5xl italic text-tgp-bone max-w-[900px] leading-[1.2] tracking-tight">
+                "El archivo no es un depósito inerte, sino el lugar donde el tiempo se detiene para exigir ser leído de nuevo."
+            </h3>
+            <div class="mt-16 font-mono text-[8px] uppercase tracking-widest text-tgp-muted hairline-t pt-6 w-48 text-center">
+                Cuadernos de notas, Vol. IV
+            </div>
+        </section>
+
+        <!-- DOSSIER ESTRUCTURAL -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 hairline-b">
+            
+            <!-- Columna Izquierda: Metadatos -->
+            <div class="lg:col-span-4 p-10 lg:p-16 hairline-r flex flex-col justify-between bg-tgp-black">
+                <div>
+                    <span class="font-mono text-[8px] uppercase tracking-widest text-tgp-rust mb-8 block">Investigación en curso</span>
+                    <h2 class="font-newsreader text-[4rem] lg:text-[5rem] text-white mb-8 leading-[0.9] tracking-tighter">Dossier:<br>Memoria</h2>
+                    <p class="font-inter text-[12px] text-tgp-muted leading-relaxed max-w-xs font-light">
+                        Una serie articulada que diseca las condiciones estructurales de la memoria contemporánea. Desde el soporte físico hasta su inmaterialidad algorítmica.
+                    </p>
+                </div>
+                <div class="mt-24 pt-8 hairline-t">
+                    <a href="#" class="font-mono text-[9px] uppercase tracking-widest text-tgp-muted hover:text-white flex items-center gap-6 transition-colors group">
+                        Ver índice completo 
+                        <span class="h-px bg-tgp-hairline flex-grow group-hover:bg-tgp-muted transition-colors"></span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Relatos en grilla -->
+            <div class="lg:col-span-8 flex flex-col bg-tgp-black">
+                
+                <!-- Fila 1 -->
+                <article class="grid grid-cols-1 lg:grid-cols-2 hairline-b group tectonic-block !z-0 hover:!z-10">
+                    <div class="h-64 lg:h-auto overflow-hidden hairline-b lg:border-b-0 lg:border-r border-[#1f1e1c]">
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead27d8?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover print-image" alt="Persona escribiendo, registro de memoria">
+                    </div>
+                    <div class="p-10 lg:p-16 flex flex-col justify-center">
+                        <span class="font-mono text-[8px] uppercase tracking-widest text-tgp-muted mb-6 flex items-center gap-3">
+                            <span class="text-tgp-rust">1.</span> Génesis
+                        </span>
+                        <h3 class="font-newsreader text-3xl text-tgp-bone mb-4 tracking-tight">El origen del registro</h3>
+                        <p class="font-inter text-[12px] text-tgp-muted font-light leading-relaxed">La invención de la externalización de la memoria.</p>
+                    </div>
+                </article>
+
+                <!-- Fila 2 -->
+                <article class="grid grid-cols-1 lg:grid-cols-2 group tectonic-block !z-0 hover:!z-10">
+                    <div class="p-10 lg:p-16 flex flex-col justify-center hairline-b lg:border-b-0 lg:border-r border-[#1f1e1c] order-2 lg:order-1">
+                        <span class="font-mono text-[8px] uppercase tracking-widest text-tgp-muted mb-6 flex items-center gap-3">
+                            <span class="text-tgp-rust">II.</span> Erosión
+                        </span>
+                        <h3 class="font-newsreader text-3xl text-tgp-bone mb-4 tracking-tight">La falla del soporte</h3>
+                        <p class="font-inter text-[12px] text-tgp-muted font-light leading-relaxed">El polvo, el óxido y la degradación inminente.</p>
+                    </div>
+                     <div class="h-64 lg:h-auto overflow-hidden order-1 lg:order-2">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover print-image" alt="Circuitos, degradación tecnológica">
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SISTEMA DE CLASIFICACIÓN INFERIOR -->
+        <section class="grid grid-cols-2 lg:grid-cols-4 hairline-b bg-tgp-black">
+            <div class="p-10 lg:p-16 flex flex-col items-center justify-center hairline-r hairline-b lg:border-b-0 hover:bg-tgp-surface transition-colors cursor-pointer group">
+                <span class="font-newsreader text-2xl text-tgp-bone mb-4 group-hover:italic transition-all">Ensayo</span>
+                <span class="font-mono text-[7px] uppercase tracking-widest text-tgp-muted">Desarrollo Extenso</span>
+            </div>
+            <div class="p-10 lg:p-16 flex flex-col items-center justify-center hairline-r hairline-b lg:border-b-0 hover:bg-tgp-surface transition-colors cursor-pointer group">
+                <span class="font-newsreader text-2xl text-tgp-bone mb-4 group-hover:italic transition-all">Interview</span>
+                <span class="font-mono text-[7px] uppercase tracking-widest text-tgp-muted">Diálogos Estructurados</span>
+            </div>
+            <div class="p-10 lg:p-16 flex flex-col items-center justify-center hairline-r hover:bg-tgp-surface transition-colors cursor-pointer group">
+                <span class="font-newsreader text-2xl text-tgp-bone mb-4 group-hover:italic transition-all">Dialogic</span>
+                <span class="font-mono text-[7px] uppercase tracking-widest text-tgp-muted">Tensión Conceptual</span>
+            </div>
+            <div class="p-10 lg:p-16 flex flex-col items-center justify-center hover:bg-tgp-surface transition-colors cursor-pointer group">
+                <span class="font-newsreader text-2xl text-tgp-bone mb-4 group-hover:italic transition-all">Cahier</span>
+                <span class="font-mono text-[7px] uppercase tracking-widest text-tgp-muted">Notas y Bocetos</span>
+            </div>
+        </section>
+
+        <!-- FOOTER TÉCNICO -->
+        <footer class="p-6 flex flex-col md:flex-row justify-between items-center font-mono text-[7px] uppercase tracking-widest text-tgp-muted bg-tgp-black">
+            <span class="mb-4 md:mb-0">SYS.TGP_PROJECT // EST. 2026</span>
+            <span>Condiciones Materiales de la Historia</span>
+        </footer>
+
+    </main>
+
+</body>
+</html>

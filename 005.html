@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivo TGP | The Great Puzzle Project</title>
+    
+    <!-- Tipografías de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Fira+Code:wght@300;400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (via CDN para la vista previa) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Bodoni Moda', 'serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        tgp: {
+                            dark: '#0f0f0f',
+                            card: '#161616',
+                            accent: '#DA5A41',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Ajustes finos para el efecto Neo-Editorial */
+        body {
+            background-color: #0f0f0f;
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .bento-grid {
+            display: grid;
+            grid-auto-flow: dense;
+            grid-auto-rows: minmax(180px, auto);
+        }
+        
+        /* Efecto de ruido sutil para emular papel/grano (opcional) */
+        .bg-noise {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-tgp-dark min-h-screen relative bg-noise selection:bg-tgp-accent selection:text-white">
+
+    <!-- HEADER / HERO SECTION -->
+    <header class="w-full pt-24 pb-16 px-6 md:px-12 flex flex-col items-center justify-center text-center relative z-10">
+        <span class="font-mono text-tgp-accent text-[11px] uppercase tracking-[0.2em] mb-6 block opacity-90">
+            Dossier de Investigación
+        </span>
+        <h1 class="font-serif text-5xl md:text-7xl lg:text-[80px] font-normal leading-[1.1] tracking-tight max-w-5xl mx-auto">
+            El Archivo de <br/> <span class="italic text-white/80">Piezas Olvidadas</span>
+        </h1>
+        <p class="font-sans text-white/60 text-lg md:text-xl mt-8 max-w-2xl mx-auto font-light leading-relaxed">
+            Una colección no lineal de fragmentos históricos, antropológicos y filosóficos que conforman el rompecabezas de la condición humana en Sudamérica.
+        </p>
+    </header>
+
+    <!-- MAIN BENTO GRID -->
+    <main class="max-w-[1400px] mx-auto px-6 md:px-12 pb-32">
+        <div class="bento-grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            
+            <!-- TARJETA 1 (Destacada / Grande) - Emula tu imagen de perfil con sombras -->
+            <article class="group relative overflow-hidden bg-tgp-card border border-white/5 hover:border-white/15 transition-colors duration-500 rounded-sm md:col-span-2 md:row-span-2 flex flex-col">
+                <div class="relative w-full flex-grow overflow-hidden aspect-[4/3] md:aspect-auto">
+                    <img src="https://images.unsplash.com/photo-1507699622108-4be3abd695ad?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Luz y Sombra" 
+                         class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 grayscale-[40%] opacity-80"
+                         onerror="this.src='https://placehold.co/800x600/161616/333333?text=Imagen+TGP'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-tgp-card via-tgp-card/20 to-transparent"></div>
+                </div>
+                <div class="p-6 md:p-8 z-10 relative bg-tgp-card border-t border-white/5">
+                    <span class="font-mono text-tgp-accent text-[10px] uppercase tracking-[0.2em] block mb-3">Gabinete de arquetipos</span>
+                    <h3 class="font-sans font-medium text-white text-2xl md:text-3xl leading-snug tracking-tight mb-3 group-hover:text-white transition-colors">
+                        Luz y Sombra: El individuo ante el tiempo
+                    </h3>
+                    <p class="font-sans text-white/60 text-sm md:text-base font-light leading-relaxed max-w-md">
+                        Un dossier visual que explora la dualidad de la memoria y el olvido en la identidad sudamericana contemporánea.
+                    </p>
+                </div>
+            </article>
+
+            <!-- TARJETA 2 (Estándar) - Emula el mapa/códice -->
+            <article class="group relative overflow-hidden bg-tgp-card border border-white/5 hover:border-white/15 transition-colors duration-500 rounded-sm col-span-1 row-span-1 flex flex-col">
+                <div class="relative w-full aspect-video overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=800&auto=format&fit=crop" 
+                         alt="Mapas del Olvido" 
+                         class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 grayscale-[60%] opacity-70">
+                    <div class="absolute inset-0 bg-gradient-to-t from-tgp-card to-transparent opacity-80"></div>
+                </div>
+                <div class="p-5 z-10 relative flex-grow bg-tgp-card">
+                    <span class="font-mono text-tgp-accent text-[9px] uppercase tracking-[0.2em] block mb-2">Mapas del Olvido</span>
+                    <h3 class="font-sans font-medium text-white text-lg leading-snug tracking-tight mb-2">
+                        Reescribiendo la Cartografía Colonial
+                    </h3>
+                    <p class="font-sans text-white/50 text-xs font-light leading-relaxed">
+                        Pistas olvidadas en mapas del siglo XVII sugieren una geografía alternativa en Burzaco.
+                    </p>
+                </div>
+            </article>
+
+            <!-- TARJETA 3 (Cuadrada) - Emula documentos viejos -->
+            <article class="group relative overflow-hidden bg-tgp-card border border-white/5 hover:border-white/15 transition-colors duration-500 rounded-sm col-span-1 row-span-1 flex flex-col justify-end">
+                <div class="absolute inset-0 w-full h-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1455390582262-044cdead2708?q=80&w=800&auto=format&fit=crop" 
+                         alt="Gabinete de Curiosidades" 
+                         class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 grayscale-[80%] opacity-40 mix-blend-screen">
+                    <div class="absolute inset-0 bg-gradient-to-t from-tgp-card via-tgp-card/80 to-transparent"></div>
+                </div>
+                <div class="p-5 z-10 relative">
+                    <span class="font-mono text-tgp-accent text-[9px] uppercase tracking-[0.2em] block mb-2">Archivo TGP</span>
+                    <h3 class="font-sans font-medium text-white text-xl leading-snug tracking-tight mb-2">
+                        El Motor Cognitivo
+                    </h3>
+                    <p class="font-sans text-white/60 text-xs font-light leading-relaxed">
+                        Colección de fragmentos y notas de campo que componen la base de datos central.
+                    </p>
+                </div>
+            </article>
+
+            <!-- TARJETA 4 (Horizontal / Ancha) - Emula estructuras sociales/históricas -->
+            <article class="group relative overflow-hidden bg-tgp-card border border-white/5 hover:border-white/15 transition-colors duration-500 rounded-sm md:col-span-2 row-span-1 flex flex-col md:flex-row items-center">
+                <div class="relative w-full md:w-1/2 h-48 md:h-full overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1518991043280-1da61d9f3ac5?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Superposiciones Geopolíticas" 
+                         class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 grayscale-[50%] opacity-70">
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent to-tgp-card hidden md:block"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-tgp-card to-transparent block md:hidden"></div>
+                </div>
+                <div class="p-6 md:p-8 z-10 relative w-full md:w-1/2 bg-tgp-card md:bg-transparent flex flex-col justify-center">
+                    <span class="font-mono text-tgp-accent text-[9px] uppercase tracking-[0.2em] block mb-2">El Gran Rompecabezas</span>
+                    <h3 class="font-sans font-medium text-white text-xl md:text-2xl leading-snug tracking-tight mb-3">
+                        Superposiciones Geopolíticas en el Sur
+                    </h3>
+                    <p class="font-sans text-white/50 text-sm font-light leading-relaxed">
+                        Un análisis comparativo entre las fronteras físicas y las narrativas de poder superpuestas a lo largo de los siglos.
+                    </p>
+                </div>
+            </article>
+
+            <!-- TARJETA 5 (Horizontal Larga) - Emula ilustración social masiva -->
+            <article class="group relative overflow-hidden bg-[#1a1a1a] border border-white/5 hover:border-white/15 transition-colors duration-500 rounded-sm md:col-span-4 row-span-1 flex flex-col md:flex-row items-center">
+                <div class="p-8 md:p-12 z-10 relative w-full md:w-1/2 flex flex-col justify-center order-2 md:order-1">
+                    <span class="font-mono text-tgp-accent text-[10px] uppercase tracking-[0.2em] block mb-3">Historia como Puzzle</span>
+                    <h3 class="font-sans font-medium text-white text-2xl md:text-4xl leading-snug tracking-tight mb-4">
+                        La Estructura de las Revoluciones
+                    </h3>
+                    <p class="font-sans text-white/60 text-sm md:text-base font-light leading-relaxed max-w-lg mb-6">
+                        Desglosando los hitos olvidados que explican nuestra condición política actual. ¿Qué piezas se ocultaron deliberadamente de la narrativa oficial?
+                    </p>
+                    <a href="#" class="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-white hover:text-tgp-accent transition-colors w-fit">
+                        <span class="w-8 h-[1px] bg-current"></span> Leer el Ensayo Completo
+                    </a>
+                </div>
+                <div class="relative w-full md:w-1/2 h-64 md:h-full overflow-hidden order-1 md:order-2">
+                    <img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?q=80&w=1200&auto=format&fit=crop" 
+                         alt="Revoluciones" 
+                         class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 grayscale-[70%] opacity-50 mix-blend-luminosity">
+                    <div class="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-[#1a1a1a] hidden md:block"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] to-transparent block md:hidden"></div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- FOOTER SIMPLE -->
+    <footer class="w-full border-t border-white/5 py-8 text-center">
+        <p class="font-mono text-[10px] text-white/30 uppercase tracking-[0.3em]">
+            The Great Puzzle Project &copy; 2026
+        </p>
+    </footer>
+
+</body>
+</html>

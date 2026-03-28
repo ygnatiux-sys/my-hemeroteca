@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TGP - Resurgir</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuentes para la estética editorial original -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            margin: 0;
+            overflow: hidden;
+        }
+        .font-serif-editorial {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-mono-editorial {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Efecto de grano sutil para textura de papel */
+        .grain {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="grain"></div>
+
+    <section class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden bg-[#121212]">
+        
+        <!-- Contenedor de Imagen de Fondo con Filtros Editoriales -->
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2000&auto=format&fit=crop" 
+                alt="Fondo TGP - Escultura" 
+                class="w-full h-full object-cover opacity-50 grayscale-[40%] mix-blend-overlay scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/30 to-[#121212]/80"></div>
+        </div>
+
+        <!-- Contenido Central -->
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto flex flex-col items-center">
+            
+            <span class="font-mono-editorial text-[#DA5A41] text-[11px] uppercase tracking-[0.2em] mb-6 block">
+                Dossier de Investigación 04
+            </span>
+
+            <h1 class="font-serif-editorial text-6xl md:text-8xl lg:text-[130px] font-normal text-white leading-[0.85] tracking-tight mb-8">
+                RESURGIR
+            </h1>
+
+            <p class="font-sans text-lg text-white/70 max-w-xl font-light leading-relaxed border-l border-white/10 pl-6 italic">
+                Una indagación sobre las estructuras de memoria olvidadas y cómo el pasado insiste en reescribir nuestro presente.
+            </p>
+
+        </div>
+
+        <!-- Indicador de Scroll / Estética de Archivo -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+            <span class="font-mono-editorial text-[9px] text-white/40 uppercase tracking-widest">Descubrir</span>
+            <div class="w-[1px] h-12 bg-white/20"></div>
+        </div>
+
+        <!-- Metadata Lateral -->
+        <div class="absolute left-10 bottom-10 hidden lg:block">
+            <div class="font-mono-editorial text-[9px] text-white/20 uppercase tracking-[0.3em] rotate-180" style="writing-mode: vertical-rl;">
+                TGP Project // Archive_Ref_04
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

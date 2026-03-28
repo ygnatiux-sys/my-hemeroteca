@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Great Puzzle Project | Xavier Benítez</title>
+  <meta name="description" content="The Great Puzzle Project: arqueosemiótica, memoria y sentido. Seminarios, ensayos y cartografías de la historia humana." />
+  <style>
+    :root {
+      --bg-main: #05060a;
+      --bg-alt: #0b0e16;
+      --bg-card: #0f172a;
+      --accent: #00e0ff;
+      --accent-soft: rgba(0, 224, 255, 0.18);
+      --accent-strong: #38bdf8;
+      --text-main: #e5e7eb;
+      --text-soft: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.3);
+      --shadow-soft: 0 22px 45px rgba(0, 0, 0, 0.7);
+      --radius-xl: 24px;
+      --radius-full: 999px;
+      --transition-fast: 180ms ease-out;
+      --transition-slow: 280ms ease-out;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 45%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shell-inner {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* HEADER */
+    .main-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.86));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.24);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.5rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 20%, #22d3ee, #0369a1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 14px 28px rgba(8, 47, 73, 0.85);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 0%, rgba(240, 249, 255, 0.55), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+
+    .logo-mark span {
+      position: relative;
+      font-size: 1.2rem;
+      filter: drop-shadow(0 0 10px rgba(15, 23, 42, 0.8));
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.08rem;
+    }
+
+    .brand-title {
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.88rem;
+    }
+
+    .nav-link {
+      color: var(--text-soft);
+      padding: 0.25rem 0;
+      position: relative;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+      transition: width var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: #f9fafb;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.82rem;
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.4));
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.6);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .nav-cta-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+    }
+
+    .nav-cta:hover {
+      border-color: var(--accent);
+      box-shadow: 0 20px 45px rgba(8, 47, 73, 0.85);
+      transform: translateY(-1px);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.7);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      width: 16px;
+      height: 1.5px;
+      background: #e5e7eb;
+      position: relative;
+    }
+
+    .menu-toggle span::before,
+    .menu-toggle span::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 1.5px;
+      background: #e5e7eb;
+      left: 0;
+      transition: transform var(--transition-fast), opacity var(--transition-fast), top var(--transition-fast), bottom var(--transition-fast);
+    }
+
+    .menu-toggle span::before {
+      top: -5px;
+    }
+
+    .menu-toggle span::after {
+      bottom: -5px;
+    }
+
+    .menu-toggle.is-open span {
+      background: transparent;
+    }
+
+    .menu-toggle.is-open span::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    .menu-toggle.is-open span::after {
+      bottom: 0;
+      transform: rotate(-45deg);
+    }
+
+    .mobile-nav {
+      display: none;
+      border-top: 1px solid rgba(31, 41, 55, 0.8);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+      padding: 0.75rem 1.5rem 1.2rem;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .mobile-nav a {
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      padding: 0.15rem 0;
+    }
+
+    .mobile-nav a:hover {
+      color: #f9fafb;
+    }
+
+    .mobile-cta {
+      margin-top: 0.6rem;
+      align-self: flex-start;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 3.5rem 0 2.5rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7));
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-kicker-pill {
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(8, 47, 73, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.9);
+      font-size: 0.7rem;
+      color: #e0f2fe;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      line-height: 1.08;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-title span.highlight {
+      color: var(--accent-strong);
+    }
+
+    .hero-lead {
+      font-size: 0.98rem;
+      color: var(--text-soft);
+      max-width: 32rem;
+      line-height: 1.65;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+      margin-bottom: 1.4rem;
+    }
+
+    .btn-primary {
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      background: radial-gradient(circle at top left, #22d3ee, #0369a1);
+      color: #0b1120;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      box-shadow: 0 18px 40px rgba(8, 47, 73, 0.9);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+    }
+
+    .btn-primary span.icon {
+      font-size: 1rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px) translateZ(0);
+      box-shadow: 0 22px 55px rgba(8, 47, 73, 1);
+      filter: brightness(1.05);
+    }
+
+    .btn-ghost {
+      padding: 0.65rem 1.3rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 0.88rem;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.85);
+      transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn-ghost span.icon {
+      font-size: 1rem;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 20px 44px rgba(15, 23, 42, 0.95);
+    }
+
+    .hero-meta {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .meta-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.8);
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .hero-orbit {
+      position: relative;
+      border-radius: 32px;
+      background: radial-gradient(circle at top, #020617, #020617 50%, #000 100%);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: var(--shadow-soft);
+      padding: 1.4rem 1.4rem 1.6rem;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-orbit::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 20% 0%, rgba(56, 189, 248, 0.18), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-orbit-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.1rem;
+      gap: 1rem;
+    }
+
+    .hero-orbit-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-soft);
+    }
+
+    .hero-orbit-tag strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+
+    .hero-badge {
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.85);
+      font-size: 0.7rem;
+      color: #e0f2fe;
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.85));
+    }
+
+    .hero-quote {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-quote strong {
+      color: #f9fafb;
+      font-weight: 500;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .pill {
+      font-size: 0.72rem;
+      padding: 0.24rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-soft);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .pill.primary {
+      border-color: rgba(56, 189, 248, 0.9);
+      color: #e0f2fe;
+      background: rgba(8, 47, 73, 0.9);
+    }
+
+    .hero-orbit-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      border-top: 1px dashed rgba(148, 163, 184, 0.4);
+      padding-top: 0.9rem;
+      margin-top: 0.4rem;
+    }
+
+    .hero-avatar {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .hero-avatar-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0%, #1f2937, #020617 65%);
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-avatar-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .hero-avatar-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .hero-avatar-role {
+      font-size: 0.72rem;
+      color: var(--text-soft);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 0.85rem;
+      font-size: 0.7rem;
+      color: var(--text-soft);
+    }
+
+    .hero-stats span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .hero-stat-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.9);
+    }
+
+    /* GENERIC SECTION */
+    section {
+      padding: 2.5rem 0;
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .section-kicker {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--accent-strong);
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .section-lead {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      max-width: 36rem;
+      line-height: 1.7;
+    }
+
+    /* MARCO */
+    #marco {
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+    }
+
+    .marco-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 2.4rem;
+      align-items: flex-start;
+    }
+
+    .marco-body {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .marco-body strong {
+      color: #e5e7eb;
+    }
+
+    .marco-note {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      padding: 0.6rem 0.75rem;
+      border-radius: 16px;
+      border: 1px dashed rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .marco-cards {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .marco-card {
+      border-radius: 18px;
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      background: radial-gradient(circle at top, #020617, #020617 50%, #020617 100%);
+      padding: 0.9rem 1rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .marco-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .marco-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+    }
+
+    .marco-chip {
+      font-size: 0.68rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: var(--text-soft);
+    }
+
+    .marco-title {
+      font-size: 0.98rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .marco-text {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+      margin-bottom: 0.45rem;
+    }
+
+    .marco-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .mini-tag {
+      font-size: 0.7rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(30, 64, 175, 0.8);
+      color: #c7d2fe;
+    }
+
+    .mini-tag.alt {
+      border-color: rgba(56, 189, 248, 0.9);
+      color: #bae6fd;
+    }
+
+    /* SEMINARIOS */
+    #seminarios {
+      background: radial-gradient(circle at top, #020617, #020617 55%, #000 100%);
+    }
+
+    .seminarios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .sem-card {
+      border-radius: 20px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
+      padding: 1rem 1.1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      transition: transform var(--transition-slow), box-shadow var(--transition-slow), border-color var(--transition-fast);
+    }
+
+    .sem-card:hover {
+      transform: translateY(-4px) translateZ(0);
+      box-shadow: 0 26px 60px rgba(15, 23, 42, 1);
+      border-color: rgba(56, 189, 248, 0.9);
+    }
+
+    .sem-kicker {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-soft);
+    }
+
+    .sem-title {
+      font-size: 0.98rem;
+      font-weight: 500;
+    }
+
+    .sem-text {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .sem-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+      font-size: 0.72rem;
+      color: var(--text-soft);
+    }
+
+    .sem-pill {
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .sem-cta {
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .sem-cta span.icon {
+      font-size: 0.9rem;
+    }
+
+    /* CARTÓGRAFO */
+    #cartografo {
+      background: radial-gradient(circle at top, #020617, #020617 55%, #020617 100%);
+    }
+
+    .cart-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 2.3rem;
+      align-items: center;
+    }
+
+    .cart-avatar-block {
+      position: relative;
+    }
+
+    .cart-avatar-shell {
+      border-radius: 30px;
+      border: 1px solid rgba(30, 64, 175, 0.85);
+      background: radial-gradient(circle at top, #020617, #020617 55%, #000 100%);
+      padding: 1.4rem 1.5rem 1.6rem;
+      box-shadow: 0 22px 55px rgba(15, 23, 42, 1);
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    .cart-avatar-head {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .cart-avatar-photo {
+      width: 70px;
+      height: 70px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      background: radial-gradient(circle at 30% 0%, #1f2937, #020617 60%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .cart-avatar-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .cart-name {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .cart-role {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .cart-tagline {
+      font-size: 0.8rem;
+      color: var(--accent);
+    }
+
+    .cart-body {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .cart-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .cart-list li::before {
+      content: "•";
+      margin-right: 0.4rem;
+      color: var(--accent-strong);
+    }
+
+    .cart-note {
+      margin-top: 0.9rem;
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      border-radius: 14px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      padding: 0.5rem 0.7rem;
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .cart-text {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .cart-text strong {
+      color: #e5e7eb;
+    }
+
+    .cart-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .cart-pill {
+      font-size: 0.72rem;
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text-soft);
+    }
+
+    /* CONTACTO */
+    #contacto {
+      background: radial-gradient(circle at top, #020617, #020617 50%, #000 100%);
+      padding-bottom: 3rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 2.2rem;
+      align-items: flex-start;
+    }
+
+    .contact-text {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .contact-highlight {
+      font-size: 0.85rem;
+      padding: 0.7rem 0.8rem;
+      border-radius: 18px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.85));
+    }
+
+    .contact-form {
+      border-radius: 22px;
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      padding: 1.3rem 1.3rem 1.4rem;
+      background: radial-gradient(circle at top, #020617, #020617 55%, #020617 100%);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .field-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+    }
+
+    .field-input,
+    .field-textarea {
+      margin-top: 0.25rem;
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(51, 65, 85, 0.95);
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.55rem 0.65rem;
+      color: var(--text-main);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .field-input:focus,
+    .field-textarea:focus {
+      border-color: var(--accent-strong);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.7);
+      background: #020617;
+    }
+
+    .field-textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .contact-note {
+      font-size: 0.74rem;
+      color: var(--text-soft);
+    }
+
+    .contact-alt {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      margin-top: 0.7rem;
+    }
+
+    .contact-alt a {
+      color: var(--accent-strong);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid rgba(15, 23, 42, 0.95);
+      background: #020617;
+      padding: 1rem 0 1.3rem;
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .footer-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .footer-right a {
+      color: var(--text-soft);
+    }
+
+    .footer-right a:hover {
+      color: #e5e7eb;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .header-inner {
+        padding-inline: 1.1rem;
+      }
+
+      .main-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .hero {
+        padding-top: 2.4rem;
+      }
+
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.4rem;
+      }
+
+      .hero-right {
+        order: -1;
+      }
+
+      .marco-grid,
+      .seminarios-grid,
+      .cart-grid,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .seminarios-grid {
+        gap: 1.1rem;
+      }
+
+      section {
+        padding-block: 2.2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell-inner {
+        padding-inline: 1.1rem;
+      }
+
+      .hero-title {
+        font-size: 2.1rem;
+      }
+
+      .sem-card,
+      .marco-card,
+      .contact-form,
+      .cart-avatar-shell {
+        border-radius: 18px;
+      }
+
+      .footer-inner {
+        padding-inline: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="main-header">
+      <div class="header-inner">
+        <a href="#inicio" class="brand" aria-label="Volver al inicio">
+          <div class="logo-mark"><span>🧩</span></div>
+          <div class="brand-text">
+            <div class="brand-title">The Great Puzzle Project</div>
+            <div class="brand-subtitle">Historia · Memoria · Sentido</div>
+          </div>
+        </a>
+        <nav class="main-nav" aria-label="Navegación principal">
+          <a href="#marco" class="nav-link">El marco</a>
+          <a href="#seminarios" class="nav-link">Seminarios</a>
+          <a href="#cartografo" class="nav-link">El cartógrafo</a>
+          <a href="#contacto" class="nav-link">Contacto</a>
+          <a href="#contacto" class="nav-cta">
+            <span class="nav-cta-icon">●</span>
+            Agenda una conversación
+          </a>
+        </nav>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir/cerrar menú">
+          <span></span>
+        </button>
+      </div>
+      <nav class="mobile-nav" id="mobileNav" aria-label="Navegación móvil">
+        <a href="#marco">El marco</a>
+        <a href="#seminarios">Seminarios</a>
+        <a href="#cartografo">El cartógrafo</a>
+        <a href="#contacto">Contacto</a>
+        <a href="#contacto" class="mobile-cta">Agenda una conversación</a>
+      </nav>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <div class="shell-inner hero-grid">
+          <div>
+            <div class="hero-kicker">
+              <span class="hero-kicker-pill">Nueva etapa</span>
+              <span>De la curiosidad al mapa del sentido</span>
+            </div>
+            <h1 class="hero-title">
+              La historia no es una línea.<br />
+              <span class="highlight">Es un puzzle.</span>
+            </h1>
+            <p class="hero-lead">
+              TGP Project reconstruye cómo la humanidad ha organizado su memoria —del rito al algoritmo— para darte
+              una mirada crítica sobre el presente y una brújula para orientarte en el caos informativo.
+            </p>
+            <div class="hero-actions">
+              <a href="#marco" class="btn-primary">
+                <span class="icon">⬤</span>
+                Explorar el marco TGP
+              </a>
+              <a href="#seminarios" class="btn-ghost">
+                <span class="icon">▹</span>
+                Ver seminarios disponibles
+              </a>
+            </div>
+            <div class="hero-meta">
+              <span>Triple curaduría: archivo oficial · archivo alternativo · memoria viva</span>
+              <span class="meta-dot"></span>
+              <span>Formato: divulgación clara · rigor académico · mirada crítica</span>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <div class="hero-orbit">
+              <div class="hero-orbit-header">
+                <div>
+                  <div class="hero-orbit-tag">Season 2025 · <strong>TGP 2.0</strong></div>
+                  <div class="hero-badge">De la cueva a la nube · Cartografía del sentido humano</div>
+                </div>
+              </div>
+              <p class="hero-quote">
+                «No contamos el mundo: <strong>activamos la conciencia de cómo lo narramos</strong>. Cada seminario
+                es un laboratorio de lectura crítica para entender qué historias sostienen tu manera de vivir.»
+              </p>
+              <div class="hero-pills">
+                <span class="pill primary">Memoria · Mito · Algoritmo</span>
+                <span class="pill">Arqueosemiótica</span>
+                <span class="pill">Filosofía de la historia</span>
+                <span class="pill">Neurociencia del sentido</span>
+              </div>
+              <div class="hero-orbit-footer">
+                <div class="hero-avatar">
+                  <div class="hero-avatar-circle">XB</div>
+                  <div class="hero-avatar-meta">
+                    <div class="hero-avatar-name">Xavier Benítez</div>
+                    <div class="hero-avatar-role">Historiador · Ensayista · Curador de TGP Project</div>
+                  </div>
+                </div>
+                <div class="hero-stats">
+                  <span>
+                    <span class="hero-stat-dot"></span>
+                    15+ años de investigación
+                  </span>
+                  <span>
+                    ⟡
+                    Modelo propio: The Great Puzzle Project
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="marco">
+        <div class="shell-inner">
+          <div class="section-header">
+            <div class="section-kicker">El marco</div>
+            <h2 class="section-title">La guerra de los archivos por el monopolio del sentido</h2>
+            <p class="section-lead">
+              TGP Project lee la historia como el resultado de la tensión constante entre distintas formas de memoria
+              que compiten por definir qué es "real", qué cuenta como "verdad" y qué queda fuera del relato oficial.
+            </p>
+          </div>
+
+          <div class="marco-grid">
+            <div class="marco-body">
+              <p>
+                En lugar de otro relato total sobre el mundo, TGP funciona como una <strong>cartografía de
+                  archivos</strong>: mapas de cómo religiones, Estados, ciencias y algoritmos han organizado los
+                recuerdos de la humanidad.
+              </p>
+              <p>
+                Desde los mitos orales hasta la nube digital, estudiamos las grandes transiciones —nómada, urbana,
+                imperial, moderna, algorítmica— como cambios en la <strong>tecnología de la memoria</strong>.
+              </p>
+              <p>
+                El objetivo no es creer en un nuevo sistema, sino ganar <strong>conciencia crítica</strong> sobre cómo
+                cada época diseña la realidad que habitamos.
+              </p>
+              <div class="marco-note">
+                Cada seminario aplica este marco a un "enigma vivo": Atlántida, Doggerland, misticismos antiguos,
+                tecnologías modernas de control, wellness, espiritualidad, ciencia, política. Siempre con triple
+                lectura: oficial, alternativa y TGP.
+              </div>
+            </div>
+
+            <div class="marco-cards">
+              <article class="marco-card">
+                <div class="marco-card-header">
+                  <div class="marco-label">Archivo oficial</div>
+                  <div class="marco-chip">Academia · Estado · Medios</div>
+                </div>
+                <h3 class="marco-title">Las versiones que se enseñan como "Historia"</h3>
+                <p class="marco-text">
+                  Analizamos cómo se construyen los relatos dominantes: qué incluyen, qué excluyen, qué intereses
+                  sirven y qué tipo de sujeto quieren producir.
+                </p>
+                <div class="marco-tag-row">
+                  <span class="mini-tag">Manual escolar</span>
+                  <span class="mini-tag">Narrativa nacional</span>
+                  <span class="mini-tag">Ciencia como institución</span>
+                </div>
+              </article>
+
+              <article class="marco-card">
+                <div class="marco-card-header">
+                  <div class="marco-label">Archivo alternativo</div>
+                  <div class="marco-chip">Mitos · Heterodoxias · Contra-historias</div>
+                </div>
+                <h3 class="marco-title">Lo que resiste, sospecha o desborda al archivo oficial</h3>
+                <p class="marco-text">
+                  Desde teorías marginales hasta tradiciones espirituales, analizamos las propuestas alternativas sin
+                  devoción ni desprecio: como síntomas de algo que el relato oficial no resuelve.
+                </p>
+                <div class="marco-tag-row">
+                  <span class="mini-tag alt">Historia alternativa</span>
+                  <span class="mini-tag alt">Pensamiento mágico</span>
+                  <span class="mini-tag alt">Conspiraciones</span>
+                </div>
+              </article>
+
+              <article class="marco-card">
+                <div class="marco-card-header">
+                  <div class="marco-label">Memoria viva</div>
+                  <div class="marco-chip">Cuerpo · Afecto · Práctica</div>
+                </div>
+                <h3 class="marco-title">Cómo nos narra lo que vivimos hoy</h3>
+                <p class="marco-text">
+                  El tercer nivel de lectura: cómo todas esas historias impactan en tu vida cotidiana, tus decisiones, tu
+                  manera de habitar el cuerpo, el trabajo, los vínculos y la espiritualidad.
+                </p>
+                <div class="marco-tag-row">
+                  <span class="mini-tag">Biografía</span>
+                  <span class="mini-tag">Cultura digital</span>
+                  <span class="mini-tag">Arquitectura del yo</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="seminarios">
+        <div class="shell-inner">
+          <div class="section-header">
+            <div class="section-kicker">Seminarios</div>
+            <h2 class="section-title">Formatos para pensar juntos el puzzle</h2>
+            <p class="section-lead">
+              Sesiones online, ciclos temáticos y recorridos especiales diseñados para distintos niveles de
+              profundidad: desde la curiosidad inicial hasta el trabajo sistemático con el Canon TGP.
+            </p>
+          </div>
+
+          <div class="seminarios-grid">
+            <article class="sem-card">
+              <div class="sem-kicker">Nivel 1 · Curiosidad guiada</div>
+              <h3 class="sem-title">Enigmas vivos 🧩</h3>
+              <p class="sem-text">
+                Encuentros introductorios donde usamos un enigma (Atlántida, Doggerland, civilizaciones perdidas,
+                mancias, wellness, etc.) como puerta de entrada para entender cómo funciona la guerra de archivos en
+                la cultura actual.
+              </p>
+              <div class="sem-meta">
+                <span class="sem-pill">Formato charla · 60–90 min</span>
+                <span class="sem-pill">Preguntas abiertas</span>
+              </div>
+              <a href="#contacto" class="sem-cta">
+                <span class="icon">↳</span>
+                Ideal para grupos mixtos o primeros pasos
+              </a>
+            </article>
+
+            <article class="sem-card">
+              <div class="sem-kicker">Nivel 2 · Marco en acción</div>
+              <h3 class="sem-title">Talleres de arqueosemiótica</h3>
+              <p class="sem-text">
+                Aplicamos el marco TGP a casos concretos: religiones, tecnologías, corrientes filosóficas, narrativas
+                políticas y espirituales. Trabajamos con textos, imágenes y ejemplos actuales.
+              </p>
+              <div class="sem-meta">
+                <span class="sem-pill">4–6 encuentros</span>
+                <span class="sem-pill">Material de lectura curado</span>
+                <span class="sem-pill">Ejercicios de análisis</span>
+              </div>
+              <a href="#contacto" class="sem-cta">
+                <span class="icon">↳</span>
+                Para comunidades, grupos de estudio y proyectos educativos
+              </a>
+            </article>
+
+            <article class="sem-card">
+              <div class="sem-kicker">Nivel 3 · Trabajo en profundidad</div>
+              <h3 class="sem-title">Acompañamiento y diseño de sentido</h3>
+              <p class="sem-text">
+                Sesiones 1:1 o grupos pequeños para quienes quieren integrar TGP en su propio trabajo: docentes,
+                creadores de contenido, investigadores, terapeutas, comunicadores y proyectos culturales.
+              </p>
+              <div class="sem-meta">
+                <span class="sem-pill">Sesiones personalizadas</span>
+                <span class="sem-pill">Aplicado a tu proyecto</span>
+              </div>
+              <a href="#contacto" class="sem-cta">
+                <span class="icon">↳</span>
+                Escribe y vemos juntos qué formato encaja mejor
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="cartografo">
+        <div class="shell-inner">
+          <div class="section-header">
+            <div class="section-kicker">El cartógrafo</div>
+            <h2 class="section-title">Quién está detrás de The Great Puzzle Project</h2>
+          </div>
+
+          <div class="cart-grid">
+            <div class="cart-avatar-block">
+              <div class="cart-avatar-shell">
+                <div class="cart-avatar-head">
+                  <div class="cart-avatar-photo">XB</div>
+                  <div class="cart-avatar-meta">
+                    <div class="cart-name">Xavier Benítez</div>
+                    <div class="cart-role">Historiador · Ensayista · Curador de TGP Project</div>
+                    <div class="cart-tagline">Explorador de cómo la humanidad se cuenta a sí misma para poder vivir.</div>
+                  </div>
+                </div>
+                <p class="cart-body">
+                  Trabajo en la intersección entre historia, filosofía, ciencias cognitivas y antropología del
+                  conocimiento. Mi foco no es solo <em>qué</em> creemos, sino <strong>qué estructuras hacen posible que
+                    lo creamos</strong>.
+                </p>
+                <ul class="cart-list">
+                  <li>Investigación en historia de las ideas y arqueología del saber.</li>
+                  <li>Divulgación crítica en ciencias sociales y naturales.</li>
+                  <li>Diseño de marcos conceptuales aplicados a proyectos culturales y educativos.</li>
+                </ul>
+                <div class="cart-note">
+                  The Great Puzzle Project es el resultado de años de trabajo con archivos, textos, comunidades y
+                  proyectos que necesitan algo más que "contenidos": necesitan <strong>coherencia</strong> sin perder
+                  complejidad.
+                </div>
+              </div>
+            </div>
+
+            <div class="cart-text">
+              <p>
+                Mi trabajo combina la lectura histórica rigurosa con una pregunta contemporánea muy simple:
+                <strong>¿qué relatos sostienen hoy nuestra manera de estar en el mundo y cuáles ya no alcanzan?</strong>
+              </p>
+              <p>
+                En vez de ofrecer una nueva doctrina, TGP propone un espacio de observación: ver cómo distintos
+                "sistemas de memoria" —religiosos, científicos, tecnológicos, espirituales— compiten por definir qué
+                cuenta como real.
+              </p>
+              <p>
+                Este proyecto está pensado para personas que sospechan que algo en el relato actual no cierra, pero no
+                quieren caer ni en el cinismo fácil ni en la credulidad sin criterio. Si ese es tu lugar, aquí hay
+                trabajo para hacer juntos.
+              </p>
+              <div class="cart-pill-row">
+                <span class="cart-pill">Perspectiva crítica, no cínica</span>
+                <span class="cart-pill">Apertura a nuevas hipótesis, sin New Age</span>
+                <span class="cart-pill">Rigor académico, lenguaje humano</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto">
+        <div class="shell-inner">
+          <div class="section-header">
+            <div class="section-kicker">Contacto</div>
+            <h2 class="section-title">Abrir una conversación</h2>
+            <p class="section-lead">
+              Si te resuena el enfoque, escribe unas líneas sobre quién eres, desde dónde llegas a TGP y qué te
+              gustaría trabajar: un enigma, un proyecto, una comunidad, una búsqueda personal.
+            </p>
+          </div>
+
+          <div class="contact-grid">
+            <div class="contact-text">
+              <div class="contact-highlight">
+                No hay formularios automáticos ni respuestas prearmadas. Cada mensaje se lee con tiempo y se responde
+                de manera personalizada en la medida de lo posible.
+              </div>
+              <p>
+                Puedes usar el formulario o escribir directamente por correo. Si estás organizando una actividad (curso,
+                seminario, ciclo de charlas), menciona:
+              </p>
+              <ul class="cart-list">
+                <li>Tipo de espacio (institución, comunidad, proyecto independiente).</li>
+                <li>Audiencia aproximada y nivel de profundidad deseado.</li>
+                <li>Formato imaginado: charla única, ciclo, taller, acompañamiento.</li>
+              </ul>
+              <p>
+                A partir de ahí vemos juntos qué pieza del puzzle tiene sentido activar.
+              </p>
+            </div>
+
+            <div class="contact-form">
+              <form action="mailto:tu-correo@ejemplo.com" method="post" enctype="text/plain">
+                <div>
+                  <label class="field-label" for="nombre">Nombre</label>
+                  <input class="field-input" type="text" id="nombre" name="nombre" placeholder="¿Cómo te llamas?" required />
+                </div>
+                <div>
+                  <label class="field-label" for="correo">Correo electrónico</label>
+                  <input class="field-input" type="email" id="correo" name="correo" placeholder="nombre@ejemplo.com" required />
+                </div>
+                <div>
+                  <label class="field-label" for="mensaje">Mensaje</label>
+                  <textarea class="field-textarea" id="mensaje" name="mensaje" placeholder="Cuéntame brevemente qué te gustaría explorar o trabajar." required></textarea>
+                </div>
+                <div class="contact-actions">
+                  <button type="submit" class="btn-primary">
+                    <span class="icon">✉</span>
+                    Enviar mensaje
+                  </button>
+                  <div class="contact-note">
+                    Revisarás el mensaje antes de enviar: se abrirá en tu gestor de correo predeterminado.
+                  </div>
+                </div>
+              </form>
+              <div class="contact-alt">
+                También puedes escribir directamente a
+                <a href="mailto:tu-correo@ejemplo.com">tu-correo@ejemplo.com</a>
+                o compartir este sitio con quien creas que pueda necesitarlo.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>© <span id="year"></span> The Great Puzzle Project · Xavier Benítez</div>
+        <div class="footer-right">
+          <span>Historia · Memoria · Sentido</span>
+          <span>·</span>
+          <a href="#inicio">Volver arriba</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+
+    if (menuToggle && mobileNav) {
+      menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('is-open');
+        mobileNav.classList.toggle('open');
+      });
+
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menuToggle.classList.remove('is-open');
+          mobileNav.classList.remove('open');
+        });
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+import React, { useState } from 'react';
+
+/**
+ * Componente CardTGP (Versión React para Previsualización)
+ * - Tipografía: Bodoni Moda (Didone) para títulos, JetBrains Mono para metadata.
+ * - Colores: White (#FFFFFF) y Oxide Red (#8B261E).
+ * - Dirección de Arte: "Ciega" (enfoque en texturas y formas).
+ */
+
+const CardTGP = ({ 
+  image, 
+  category, 
+  title, 
+  description, 
+  spanCols = "col-span-1", 
+  spanRows = "row-span-1",
+  isMain = false 
+}) => {
+  return (
+    <article className={`
+      group relative overflow-hidden bg-[#141414] border border-white/5 
+      transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]
+      hover:bg-[#1a1a1a] hover:border-white/10
+      flex flex-col h-full
+      ${spanCols} ${spanRows}
+    `}>
+      
+      {/* Contenedor de Imagen con dirección de arte "Ciega" */}
+      <div className={`relative w-full overflow-hidden bg-black ${isMain ? 'h-[300px]' : 'h-[200px]'}`}>
+        <img 
+          src={image} 
+          alt={title} 
+          className="
+            w-full h-full object-cover 
+            transition-all duration-1000 ease-out 
+            grayscale brightness-[0.6] mix-blend-luminosity
+            group-hover:scale-105 group-hover:brightness-[0.8] group-hover:grayscale-[0.4]
+          "
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-transparent to-transparent opacity-60"></div>
+      </div>
+
+      {/* Contenido Textual */}
+      <div className="p-6 md:p-8 flex flex-col flex-grow relative z-10">
+        
+        {/* Categoría / Registro Técnico */}
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-6 h-[1px] bg-[#8B261E]"></div>
+          <span className="font-mono text-[#8B261E] text-[10px] uppercase tracking-[0.3em] block">
+            {category}
+          </span>
+        </div>
+
+        {/* Título Didone de Alto Contraste */}
+        <h3 className={`
+          font-serif text-white leading-[0.9] tracking-tighter uppercase
+          transition-colors duration-400
+          group-hover:text-[#8B261E]
+          ${isMain ? 'text-4xl md:text-6xl' : 'text-2xl md:text-3xl'}
+        `} style={{ fontFamily: "'Bodoni Moda', serif" }}>
+          {title}
+        </h3>
+
+        {/* Descripción Sans (Inter) */}
+        <p className="font-sans text-white/40 text-sm font-light leading-relaxed mt-4 max-w-sm line-clamp-3">
+          {description}
+        </p>
+
+        {/* Metadata de pie de tarjeta */}
+        <div className="mt-auto pt-6 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <span className="font-mono text-[9px] text-white/20 uppercase tracking-widest">Ref: TGP-MOD-04</span>
+          <svg width="12" height="12" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white/20">
+            <path d="M1 1L14 14M14 14V1M14 14H1" stroke="currentColor" strokeWidth="1.5"/>
+          </svg>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export default function App() {
+  return (
+    <div className="min-h-screen bg-[#0c0c0c] p-6 md:p-16 text-white overflow-x-hidden">
+      {/* Carga de fuentes */}
+      <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,900;1,6..96,400&family=JetBrains+Mono:wght@300;400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+      
+      {/* Grain Overlay */}
+      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
+
+      {/* Navegación Minimalista */}
+      <nav className="max-w-7xl mx-auto mb-20 flex justify-between items-start">
+        <div className="font-serif text-4xl tracking-tighter leading-none" style={{ fontFamily: "'Bodoni Moda', serif" }}>TGP<span className="text-[#8B261E]">.</span></div>
+        <ul className="flex gap-10 font-mono text-[9px] uppercase tracking-[0.3em] text-white/40">
+          <li className="hover:text-white transition-colors cursor-pointer">About</li>
+          <li className="text-white border-b border-[#8B261E] pb-1">Archive</li>
+          <li className="hover:text-white transition-colors cursor-pointer">Contact</li>
+          <li className="hover:text-white transition-colors cursor-pointer">More</li>
+        </ul>
+      </nav>
+
+      {/* Grilla Bento Adaptada */}
+      <main className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        {/* Tarjeta Principal (Archive) */}
+        <div className="md:col-span-2">
+          <CardTGP 
+            isMain={true}
+            category="Registro de Archivo"
+            title="La Trama Humana"
+            description="Un estudio sobre la evolución cromática y la degradación natural como mapa biográfico de la especie."
+            image="https://images.unsplash.com/photo-1599839619722-39751411833d?q=80&w=1200"
+          />
+        </div>
+
+        {/* Tarjeta Lateral (About) */}
+        <div className="md:col-span-1">
+          <CardTGP 
+            category="Manifiesto"
+            title="Saber Omitir"
+            description="La estética de lo oculto como herramienta de preservación histórica."
+            image="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1000"
+          />
+        </div>
+
+        {/* Tarjetas Inferiores */}
+        <CardTGP 
+          category="Cartografía"
+          title="Norte Gris"
+          description="Coordenadas de la memoria industrial."
+          image="https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?q=80&w=1000"
+        />
+        
+        <div className="bg-[#8B261E] p-8 flex flex-col justify-between">
+          <div className="font-mono text-[9px] text-black/50 uppercase tracking-widest">Fragmento 04</div>
+          <p className="font-serif text-2xl text-black font-bold uppercase tracking-tighter" style={{ fontFamily: "'Bodoni Moda', serif" }}>
+            "La historia no se repite, pero rima en las sombras."
+          </p>
+          <div className="w-8 h-[1px] bg-black/20"></div>
+        </div>
+
+        <CardTGP 
+          category="Contacto"
+          title="Acceso"
+          description="Solicitud de ingreso a niveles restringidos."
+          image="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000"
+        />
+
+      </main>
+
+      <footer className="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/5 flex justify-between items-center opacity-30 font-mono text-[9px] uppercase tracking-widest">
+        <div>Xavier Benítez // The TGP Project</div>
+        <div className="flex items-center gap-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-[#8B261E]"></div>
+          Sincronizado
+        </div>
+      </footer>
+    </div>
+  );
+}

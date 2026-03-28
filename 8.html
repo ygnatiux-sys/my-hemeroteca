@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TGP - El mapa del sentido</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Newsreader', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            paper: '#fcfcfc',
+            ink: '#1a1a1a',
+            muted: '#666666',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: theme('colors.paper'); color: theme('colors.ink'); }
+    /* Sutilezas editoriales */
+    .editorial-border { border-top: 1px solid #e5e5e5; }
+  </style>
+</head>
+<body class="font-sans antialiased text-ink selection:bg-stone-300 selection:text-black">
+
+  <!-- BARRA DE NAVEGACIÓN MINIMALISTA (Sugerida para contexto) -->
+  <header class="max-w-6xl mx-auto px-4 py-8 flex justify-between items-center editorial-border border-b mb-8">
+    <div class="font-serif text-2xl font-semibold tracking-tight">TGP</div>
+    <nav class="text-xs uppercase tracking-widest text-muted space-x-6">
+      <a href="#" class="hover:text-ink transition-colors">Archivo</a>
+      <a href="#" class="hover:text-ink transition-colors">Manifiesto</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1. GRANDE: HERO / LEAD ESSAY -->
+    <section class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="flex flex-col justify-center">
+        <span class="text-xs uppercase tracking-widest text-muted font-medium mb-6 block">Ensayo Principal</span>
+        <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.1] tracking-tight mb-8">
+          El mapa del sentido en la era digital
+        </h1>
+        <p class="text-xl text-muted leading-relaxed mb-10 font-light max-w-md">
+          Cómo la memoria humana se reconfigura entre archivo y algoritmo. Una exploración de las condiciones materiales de la historia.
+        </p>
+        <div>
+          <a href="#" class="inline-block border-b border-ink pb-1 uppercase text-xs tracking-widest hover:text-muted hover:border-muted transition-colors">Leer texto completo</a>
+        </div>
+      </div>
+      
+      <div class="aspect-[4/5] md:aspect-auto md:h-full w-full overflow-hidden bg-stone-100">
+        <!-- Imagen de marcador de posición con tono solemne -->
+        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2070&auto=format&fit=crop" alt="Libros antiguos y texturas de papel" class="w-full h-full object-cover filter grayscale opacity-90 hover:opacity-100 transition-opacity duration-700" />
+      </div>
+    </section>
+
+    <!-- 2. MEDIO: SECUNDARIOS -->
+    <section class="max-w-6xl mx-auto px-4 py-16">
+      <div class="grid md:grid-cols-3 gap-8 lg:gap-12 editorial-border pt-12">
+        <article class="group cursor-pointer">
+          <span class="text-xs text-muted mb-3 block">Ensayo</span>
+          <h2 class="font-serif text-3xl mb-4 leading-tight group-hover:text-stone-600 transition-colors">La arquitectura de la memoria urbana</h2>
+          <p class="text-muted leading-relaxed font-light">Un recorrido por las cicatrices de la ciudad y cómo el concreto almacena el tiempo humano.</p>
+        </article>
+
+        <article class="group cursor-pointer">
+          <span class="text-xs text-muted mb-3 block">Interview</span>
+          <h2 class="font-serif text-3xl mb-4 leading-tight group-hover:text-stone-600 transition-colors">Diálogos sobre la modernidad tardía</h2>
+          <p class="text-muted leading-relaxed font-light">Conversación estructurada sobre la pérdida del relato central y la fragmentación del sentido.</p>
+        </article>
+
+        <article class="group cursor-pointer">
+          <span class="text-xs text-muted mb-3 block">Dialogic</span>
+          <h2 class="font-serif text-3xl mb-4 leading-tight group-hover:text-stone-600 transition-colors">El símbolo frente al cálculo</h2>
+          <p class="text-muted leading-relaxed font-light">Tensión entre el conocimiento racional algorítmico y la persistencia de las formas simbólicas.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3. LISTA: EDITOR'S PICKS -->
+    <section class="max-w-4xl mx-auto px-4 py-24">
+      <h3 class="text-xs uppercase tracking-widest text-muted mb-12 text-center">
+        Selección del Editor
+      </h3>
+
+      <div class="space-y-12">
+        <article class="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-8 group cursor-pointer">
+          <div class="md:w-1/4 text-sm text-muted">01 / Archivo histórico</div>
+          <div class="md:w-3/4">
+            <h3 class="font-serif text-2xl md:text-4xl leading-tight group-hover:text-stone-600 transition-colors">Reconstrucción del enigma interpretativo</h3>
+          </div>
+        </article>
+
+        <div class="editorial-border"></div>
+
+        <article class="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-8 group cursor-pointer">
+          <div class="md:w-1/4 text-sm text-muted">02 / Crítica cultural</div>
+          <div class="md:w-3/4">
+            <h3 class="font-serif text-2xl md:text-4xl leading-tight group-hover:text-stone-600 transition-colors">La condición material del discurso contemporáneo</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4. AIRE: IDEA BREVE -->
+    <section class="max-w-2xl mx-auto px-4 py-32 text-center editorial-border border-b">
+      <article>
+        <h3 class="font-serif text-3xl md:text-4xl leading-relaxed mb-6 italic">
+          "El archivo no es un depósito inerte, sino el lugar donde el tiempo se detiene para exigir ser leído de nuevo."
+        </h3>
+        <p class="text-sm uppercase tracking-widest text-muted">Cuadernos de notas, Vol. IV</p>
+      </article>
+    </section>
+
+    <!-- 5. BLOQUE: DOSSIER -->
+    <section class="max-w-5xl mx-auto px-4 py-24">
+      <div class="flex flex-col md:flex-row justify-between items-baseline mb-16">
+        <h2 class="font-serif text-4xl md:text-5xl">Dossier: Archivo y Memoria</h2>
+        <a href="#" class="text-xs uppercase tracking-widest text-muted hover:text-ink transition-colors mt-4 md:mt-0">Ver dossier completo →</a>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+        <article class="group cursor-pointer">
+          <div class="text-xs text-muted mb-4 pb-4 editorial-border">Parte I</div>
+          <h3 class="font-serif text-2xl leading-snug group-hover:text-stone-600 transition-colors">Génesis del registro documental</h3>
+        </article>
+        <article class="group cursor-pointer">
+          <div class="text-xs text-muted mb-4 pb-4 editorial-border">Parte II</div>
+          <h3 class="font-serif text-2xl leading-snug group-hover:text-stone-600 transition-colors">La erosión del soporte material</h3>
+        </article>
+        <article class="group cursor-pointer">
+          <div class="text-xs text-muted mb-4 pb-4 editorial-border">Parte III</div>
+          <h3 class="font-serif text-2xl leading-snug group-hover:text-stone-600 transition-colors">El algoritmo como nuevo anticuario</h3>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6. GRID: INDEX DE FORMATOS -->
+    <section class="max-w-6xl mx-auto px-4 py-20 bg-stone-100 rounded-sm">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 text-center">
+        <article class="p-6">
+          <h4 class="font-serif text-xl italic mb-2">Interview</h4>
+          <p class="text-xs text-muted">Diálogos estructurados</p>
+        </article>
+        <article class="p-6 md:border-l border-stone-300">
+          <h4 class="font-serif text-xl italic mb-2">Dialogic</h4>
+          <p class="text-xs text-muted">Tensión conceptual</p>
+        </article>
+        <article class="p-6 border-t md:border-t-0 md:border-l border-stone-300">
+          <h4 class="font-serif text-xl italic mb-2">Cahier</h4>
+          <p class="text-xs text-muted">Notas y procesos</p>
+        </article>
+        <article class="p-6 border-t md:border-t-0 md:border-l border-stone-300">
+          <h4 class="font-serif text-xl italic mb-2">Ensayo</h4>
+          <p class="text-xs text-muted">Desarrollo extenso</p>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="max-w-6xl mx-auto px-4 py-12 mt-12 editorial-border border-t flex justify-between items-center text-xs text-muted">
+    <p>© TGP Project. Todos los derechos reservados.</p>
+    <p>Desarrollo Editorial</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+import React from 'react';
+
+/**
+ * TGP - Sistema de Archivo Multicapa
+ * Secciones: 
+ * - About: Azul Gastado + Estilo Ogg (Cormorant Garamond Italic)
+ * - Archive: Marrón/Ocre + Estilo Lust (Abril Fatface)
+ * - Contact: Amarillo Hueso + Estilo Serif Impacto (DM Serif Display)
+ */
+
+const CardTGP = ({ 
+  image, 
+  category, 
+  title, 
+  description, 
+  spanCols = "col-span-1", 
+  spanRows = "row-span-1",
+  isMain = false,
+  variant = "default" // "about", "archive", "contact", "default"
+}) => {
+  // Mapeo de estilos por variante
+  const styles = {
+    about: {
+      bg: "bg-[#2C3A47]", // Azul gastado
+      text: "text-[#D1D8E0]",
+      accent: "text-[#778ca3]",
+      font: "'Cormorant Garamond', serif",
+      italic: "italic",
+      border: "border-blue-300/10"
+    },
+    archive: {
+      bg: "bg-[#3d2b1f]", // Marrón terroso
+      text: "text-[#CD853F]", // Ocre
+      accent: "text-[#8B4513]",
+      font: "'Abril Fatface', serif",
+      italic: "",
+      border: "border-orange-900/20"
+    },
+    contact: {
+      bg: "bg-[#1a1a14]", // Fondo oscuro para resaltar el hueso
+      text: "text-[#E6E2D3]", // Amarillo Hueso
+      accent: "text-[#8B261E]", // Rojo óxido para contraste
+      font: "'DM Serif Display', serif",
+      italic: "",
+      border: "border-[#E6E2D3]/10"
+    },
+    default: {
+      bg: "bg-[#141414]",
+      text: "text-white",
+      accent: "text-[#8B261E]",
+      font: "'Bodoni Moda', serif",
+      italic: "",
+      border: "border-white/5"
+    }
+  };
+
+  const currentStyle = styles[variant] || styles.default;
+
+  return (
+    <article className={`
+      group relative overflow-hidden ${currentStyle.bg} border ${currentStyle.border}
+      transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
+      hover:brightness-110 flex flex-col h-full
+      ${spanCols} ${spanRows}
+    `}>
+      
+      {image && (
+        <div className={`relative w-full overflow-hidden bg-black ${isMain ? 'h-[350px]' : 'h-[220px]'}`}>
+          <img 
+            src={image} 
+            alt={title} 
+            className="
+              w-full h-full object-cover 
+              transition-all duration-1000 ease-out 
+              grayscale brightness-[0.5] mix-blend-luminosity
+              group-hover:scale-105 group-hover:grayscale-[0.2] group-hover:brightness-[0.7]
+            "
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+        </div>
+      )}
+
+      <div className="p-8 flex flex-col flex-grow relative z-10">
+        <div className="flex items-center gap-3 mb-6">
+          <div className={`w-8 h-[1px] ${variant === 'contact' ? 'bg-[#8B261E]' : 'bg-current opacity-30'}`}></div>
+          <span className="font-mono text-[10px] uppercase tracking-[0.4em] opacity-60">
+            {category}
+          </span>
+        </div>
+
+        <h3 className={`
+          leading-[0.85] tracking-tighter uppercase mb-6
+          ${currentStyle.text} ${currentStyle.italic}
+          ${isMain ? 'text-5xl md:text-7xl' : 'text-3xl md:text-4xl'}
+        `} style={{ fontFamily: currentStyle.font }}>
+          {title}
+        </h3>
+
+        <p className="font-sans text-white/40 text-sm font-light leading-relaxed max-w-xs">
+          {description}
+        </p>
+
+        <div className="mt-auto pt-8 flex justify-between items-center opacity-20 group-hover:opacity-100 transition-opacity">
+          <span className="font-mono text-[9px] uppercase tracking-widest italic">
+            {variant !== 'default' ? `Sec: ${variant}` : 'Ref: TGP-402'}
+          </span>
+          <div className="w-2 h-2 rounded-full bg-current"></div>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export default function App() {
+  return (
+    <div className="min-h-screen bg-[#0c0c0c] text-white overflow-x-hidden">
+      {/* Carga de fuentes específicas para las variantes solicitadas */}
+      <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@900&family=Cormorant+Garamond:ital,wght@1,300;1,600&family=Abril+Fatface&family=DM+Serif+Display&family=JetBrains+Mono:wght@300&family=Inter:wght@300&display=swap" rel="stylesheet" />
+      
+      {/* Grain Overlay */}
+      <div className="fixed inset-0 pointer-events-none z-50 opacity-[0.04]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
+
+      {/* Hero / Header */}
+      <nav className="p-12 flex justify-between items-center border-b border-white/5">
+        <div className="font-serif text-3xl tracking-tighter" style={{ fontFamily: "'Bodoni Moda', serif" }}>TGP<span className="text-[#8B261E]">.</span></div>
+        <div className="font-mono text-[9px] uppercase tracking-[0.5em] text-white/30">Sistema de Archivo Descentralizado</div>
+      </nav>
+
+      <main className="max-w-[1600px] mx-auto p-6 md:p-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          
+          {/* SECCIÓN ABOUT - Azul Gastado + Cormorant (Ogg Style) */}
+          <div className="md:col-span-8">
+            <CardTGP 
+              variant="about"
+              isMain={true}
+              category="Sobre el Proyecto"
+              title="La Intención Silenciosa"
+              description="Una búsqueda por recuperar los relatos que la modernidad decidió omitir en sus márgenes."
+              image="https://images.unsplash.com/photo-1533073356964-748614eeaf45?q=80&w=1200"
+            />
+          </div>
+
+          {/* SECCIÓN CONTACT - Amarillo Hueso + DM Serif (Anton/Sharp Style) */}
+          <div className="md:col-span-4">
+            <CardTGP 
+              variant="contact"
+              category="Terminal de Comunicación"
+              title="Acceso"
+              description="Establezca conexión con el nodo central del archivo para solicitudes de investigación."
+              image="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1000"
+            />
+          </div>
+
+          {/* SECCIÓN ARCHIVE - Marrón/Ocre + Abril Fatface (Lust Style) */}
+          <div className="md:col-span-6">
+            <CardTGP 
+              variant="archive"
+              isMain={false}
+              category="Colección Histórica"
+              title="Materia"
+              description="Registros fotográficos y documentales de la degradación industrial en el Cono Sur."
+              image="https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?q=80&w=1000"
+            />
+          </div>
+
+          {/* ESPACIO DE TEXTO PURO (MORE) */}
+          <div className="md:col-span-6 bg-[#0c0c0c] border border-white/5 p-12 flex flex-col justify-center text-center">
+            <span className="font-mono text-[10px] text-[#8B261E] uppercase tracking-[0.5em] mb-8">Nuevas Entradas</span>
+            <h2 className="font-serif text-4xl md:text-6xl uppercase tracking-tighter leading-none text-white/20 italic" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              "El tiempo es una textura que se toca con los ojos."
+            </h2>
+          </div>
+
+        </div>
+      </main>
+
+      <footer className="p-20 text-center">
+        <div className="font-mono text-[9px] uppercase tracking-[0.8em] text-white/10 italic">
+          Fin de Transmisión // 2024
+        </div>
+      </footer>
+    </div>
+  );
+}
