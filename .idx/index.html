@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TGP - Hemeroteca de Modelos</title>
+    <style>
+        :root { --bg: #0a0a0a; --card: #151515; --accent: #cda434; --text: #d1d1d1; }
+        body { font-family: 'Georgia', serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 40px; }
+        header { text-align: center; margin-bottom: 50px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+        h1 { font-weight: normal; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; }
+        .galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .proyecto { background: var(--card); border: 1px solid #222; border-radius: 4px; overflow: hidden; transition: 0.3s; text-decoration: none; color: inherit; display: block; }
+        .proyecto:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        video { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid #222; filter: grayscale(30%); }
+        .proyecto:hover video { filter: grayscale(0%); }
+        .info { padding: 15px; }
+        .info h3 { margin: 0; font-size: 1rem; color: #fff; font-family: 'Arial', sans-serif; }
+        .tag { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; margin-top: 5px; display: block; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>The Great Puzzle Project</h1>
+        <p>Archivo de Modelos y Prototipos Visuales</p>
+    </header>
+    <div class="galeria" id="mosaico">
+        </div>
+
+    <script>
+        // Lista de tus archivos basada en lo que subiste a GitHub
+        const archivos = ["01", "001", "02", "002", "03", "003", "04", "004", "004b", "05", "06", "07", "8", "008", "9", "009", "10", "11"];
+        const contenedor = document.getElementById('mosaico');
+
+        archivos.forEach(nombre => {
+            const html = `
+                <a href="${nombre}.html" class="proyecto">
+                    <video autoplay loop muted playsinline>
+                        <source src="videos/${nombre}.webm" type="video/webm">
+                    </video>
+                    <div class="info">
+                        <h3>Modelo ${nombre}</h3>
+                        <span class="tag">Archivo TGP 2026</span>
+                    </div>
+                </a>`;
+            contenedor.innerHTML += html;
+        });
+    </script>
+</body>
+</html>
